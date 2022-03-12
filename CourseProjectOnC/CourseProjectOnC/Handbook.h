@@ -63,9 +63,9 @@ void changeItemMenu(int position) {
 	switch (position) {
 	case 0: browsingRecords(); system("cls"); break;
 	case 1: searchRecords(); system("cls"); break;
-		//case 2: graphics(); SystemClear(); break;
-		//case 3: equation(); system("cls"); break;
-		//case 4: equation(); system("cls"); break;
+		//case 2: addRecords(); SystemClear(); break;
+		//case 3: editRecords(); system("cls"); break;
+		//case 4: deleteRecords(); system("cls"); break;
 	case 5: exit(1);
 	}
 }

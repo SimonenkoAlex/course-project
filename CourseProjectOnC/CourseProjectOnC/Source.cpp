@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <stdio.h>
 #include "Handbook.h"
+#include "SoundSynth.h"
 
 using namespace std;
 
@@ -286,6 +287,47 @@ void referenceBook() {
 	_getch();
 }
 
+void selectGame(int position) {
+	switch (position) {
+	case 0: drawingSynthesizer(); SystemClear(); break;
+	//case 1: functions(); SystemClear(); break;
+	case 2: exit(0);
+	}
+}
+
+void gameSelectMenu() {
+	system("cls");
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+	char lines[][20] = { "Звуковой синтезатор", "Морской бой", "Выход" };
+	COORD coordinate;
+	int position = 0, lastItemMenu = 3;
+	char code;
+	while (true) {
+		system("cls");
+		for (int i = 0; i < lastItemMenu; i++) {
+			if (position == i)
+				SetConsoleTextAttribute(handle, active);
+			else
+				SetConsoleTextAttribute(handle, noActive);
+			coordinate.X = 25; coordinate.Y = 5 + i * 2;
+			SetConsoleCursorPosition(handle, coordinate);
+			cout << i + 1 << ") " << lines[i] << endl;
+		}
+		code = _getch();
+		if (code == 72) {
+			if (position == 0) position = lastItemMenu - 1;
+			else position--;
+		}
+		if (code == 80) {
+			if (position == lastItemMenu - 1) position = 0;
+			else position++;
+		}
+		if (code == 13) selectGame(position);
+	}
+}
+
 void select(int position) {
 	switch (position) {
 	case 0: aboutAuthor(); system("cls"); break; 
@@ -294,7 +336,8 @@ void select(int position) {
 	case 3: equation(); system("cls"); break; 
 	case 4: integral(); system("cls"); break; 
 	case 5: referenceBook(); system("cls"); break;
-	case 6: exit(0);
+	case 6: gameSelectMenu(); system("cls"); break;
+	case 7: exit(0);
 	}
 }
 
@@ -303,9 +346,10 @@ int main() {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	char lines[][20] = { "Автор", "Таблица", "Графики", "Уравнение", "Интеграл", "Справочник", "Выход" };
+	char lines[][20] = { "Автор", "Таблица", "Графики", "Уравнение", 
+		"Интеграл", "Справочник", "Игры", "Выход" };
 	COORD coordinate;
-	int position = 0, lastItemMenu = 7;
+	int position = 0, lastItemMenu = 8;
 	char code;
 	while (true) {
 		system("cls");
