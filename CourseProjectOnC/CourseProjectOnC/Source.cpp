@@ -3,10 +3,12 @@
 #include <iostream>
 #include <conio.h>
 #include <stdio.h>
+#include "Handbook.h"
 
 using namespace std;
 
 const int startPosX = 10, startPosY = 5;
+FILE *DB;
 
 void SystemClear() { 
 	HWND hwn = GetConsoleWindow(); 
@@ -155,7 +157,7 @@ void integral() {
 	WORD colorPrimaryText = FOREGROUND_RED | FOREGROUND_INTENSITY;
 	WORD colorAccentText = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
 	COORD position;
-	int n, i, x0, y0; 
+	int n, i; 
 	double a, b, h, Sum = 0, Integ = 1;
 	position.X = startPosX; position.Y = startPosY;
 	do {
@@ -278,6 +280,12 @@ void equation() {
 	_getch();
 }
 
+void referenceBook() {
+	system("cls");
+	menuHandbook();
+	_getch();
+}
+
 void select(int position) {
 	switch (position) {
 	case 0: aboutAuthor(); system("cls"); break; 
@@ -285,7 +293,8 @@ void select(int position) {
 	case 2: graphics(); SystemClear(); break;
 	case 3: equation(); system("cls"); break; 
 	case 4: integral(); system("cls"); break; 
-	case 5: exit(0);
+	case 5: referenceBook(); system("cls"); break;
+	case 6: exit(0);
 	}
 }
 
@@ -294,13 +303,13 @@ int main() {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	char lines[][20] = { "Автор", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
+	char lines[][20] = { "Автор", "Таблица", "Графики", "Уравнение", "Интеграл", "Справочник", "Выход" };
 	COORD coordinate;
-	int position = 0;
+	int position = 0, lastItemMenu = 7;
 	char code;
 	while (true) {
 		system("cls");
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < lastItemMenu; i++) {
 			if (position == i)
 				SetConsoleTextAttribute(handle, active);
 			else
@@ -311,11 +320,11 @@ int main() {
 		}
 		code = _getch();
 		if (code == 72) {
-			if (position == 0) position = 5;
+			if (position == 0) position = lastItemMenu - 1;
 			else position--;
 		}
 		if (code == 80) {
-			if (position == 5) position = 0;
+			if (position == lastItemMenu - 1) position = 0;
 			else position++;
 		}
 		if (code == 13) select(position);
