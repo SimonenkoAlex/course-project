@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "Handbook.h"
 #include "SoundSynth.h"
+#include "SeaBattle.h"
 
 using namespace std;
 
@@ -290,7 +291,7 @@ void referenceBook() {
 void selectGame(int position) {
 	switch (position) {
 	case 0: drawingSynthesizer(); SystemClear(); break;
-	//case 1: functions(); SystemClear(); break;
+	case 1: toGameMenu(); SystemClear(); break;
 	case 2: exit(0);
 	}
 }
