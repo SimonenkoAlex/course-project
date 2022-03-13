@@ -6,6 +6,7 @@
 #include "Handbook.h"
 #include "SoundSynth.h"
 #include "SeaBattle.h"
+#include "MusicBox.h"
 
 using namespace std;
 
@@ -290,9 +291,10 @@ void referenceBook() {
 
 void selectGame(int position) {
 	switch (position) {
-	case 0: drawingSynthesizer(); SystemClear(); break;
-	case 1: toGameMenu(); SystemClear(); break;
-	case 2: exit(0);
+	case 0: musicBox(); system("cls"); break;
+	case 1: drawingSynthesizer(); SystemClear(); break;
+	case 2: toGameMenu(); SystemClear(); break;
+	case 3: exit(0);
 	}
 }
 
@@ -301,9 +303,9 @@ void gameSelectMenu() {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	char lines[][20] = { "Звуковой синтезатор", "Морской бой", "Выход" };
+	char lines[][25] = { "Музыкальная шкатулка", "Звуковой синтезатор", "Морской бой", "Выход" };
 	COORD coordinate;
-	int position = 0, lastItemMenu = 3;
+	int position = 0, lastItemMenu = 4;
 	char code;
 	while (true) {
 		system("cls");

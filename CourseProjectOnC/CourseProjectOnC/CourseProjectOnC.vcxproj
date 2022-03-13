@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Handbook.h" />
+    <ClInclude Include="MusicBox.h" />
     <ClInclude Include="SeaBattle.h" />
     <ClInclude Include="SoundSynth.h" />
   </ItemGroup>
