@@ -37,7 +37,7 @@ void shipShow(int x, int y, int route, int sizeShip)
 {
 	for (int i = 0; i < sizeShip; i++) {
 		gotoxy(x + 1, y + 1);
-		cout << "#";
+		cout << "| # ";
 		switch (route)
 		{
 		case 0: x++; break;
@@ -287,24 +287,31 @@ void setRandShip(int map[sizeMap][sizeMap], int sizeShip, int shipID)
 //// функция рисования поля ////
 void mapShow(int map[sizeMap][sizeMap], int mask[sizeMap][sizeMap], bool useMask)
 {
-	cout << " ";
-	for (int i = 0; i < sizeMap; i++)
-		cout << i;
+	SetColor(LightCyan, Black);
+	cout << "|   ";
+	for (int i = 0; i < sizeMap; i++) {
+		SetColor(LightCyan, Black);
+		cout << "| " << i << " ";
+		SetColor(LightBlue, LightGray);
+	}
 	cout << endl;
 	for (int i = 0; i < sizeMap; i++) {
-		cout << i;
+		SetColor(LightCyan, Black);
+		cout << "| " << i << " ";
+		SetColor(LightBlue, LightGray);
 		for (int j = 0; j < sizeMap; j++) {
 			if (mask[j][i] == 1 || useMask == 0)
 			{
-				if (map[j][i] == 0) cout << "-";
-				else if (map[j][i] == -1) cout << "X";
-				else if (map[j][i] == -2) cout << ".";
-				else cout << map[j][i];
+				if (map[j][i] == 0) cout << "| - ";
+				else if (map[j][i] == -1) cout << "| X ";
+				else if (map[j][i] == -2) cout << "| . ";
+				else cout << "| " << map[j][i] << " ";
 			}
-			else cout << " ";
+			else cout << "|   ";
 		}
-		cout << endl;
+		cout << "|" << endl;
 	}
+	SetColor(LightCyan, Black);
 }
 
 int shot(int map[sizeMap][sizeMap], int mask[sizeMap][sizeMap], int x, int y, int ships[NUM_SHIPS + 1])
@@ -374,8 +381,10 @@ int Game() {
 				cout << endl;
 				mapShow(mapAI, maskAI, 1);
 				if (turn == 1) {
+					SetColor(White, Black);
 					cout << endl << "Введите координаты цели: ";
 					cin >> x; cin >> y;
+					SetColor(LightBlue, Black);
 					resultShot = shot(mapAI, maskAI, x, y, shipsAI);
 					if (resultShot == 1) {
 						cout << "Ранен" << endl;

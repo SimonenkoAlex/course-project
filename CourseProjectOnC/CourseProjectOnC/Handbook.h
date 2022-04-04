@@ -21,6 +21,8 @@ extern FILE *DB;
 void changeItemMenu(int position);
 void browsingRecords();
 void searchRecords();
+void addRecord();
+void deleteRecord();
 
 HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 WORD colorPrimaryText = FOREGROUND_RED | FOREGROUND_INTENSITY;
@@ -63,9 +65,9 @@ void changeItemMenu(int position) {
 	switch (position) {
 	case 0: browsingRecords(); system("cls"); break;
 	case 1: searchRecords(); system("cls"); break;
-		//case 2: addRecords(); SystemClear(); break;
-		//case 3: editRecords(); system("cls"); break;
-		//case 4: deleteRecords(); system("cls"); break;
+	case 2: addRecord(); system("cls"); break;
+		//case 3: editRecord(); system("cls"); break;
+		//case 4: deleteRecord(); system("cls"); break;
 	case 5: exit(1);
 	}
 }
@@ -167,4 +169,59 @@ void searchRecords() {
 	printf("\t------------------------------------------------------------------\n");
 	fclose(DB);
 	_getch();
+}
+
+void addRecord() {
+	system("cls");
+	//setlocale(LC_CTYPE, "rus");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	struct student z[20];
+	const int startPosX = 10, startPosY = 2;
+	int i = 0; char space = ' ';
+	COORD coordinate;
+
+	if ((DB = fopen("student_group.txt", "a")) == NULL) {
+		coordinate.X = startPosX; coordinate.Y = startPosY;
+		SetConsoleCursorPosition(handle, coordinate);
+		SetConsoleTextAttribute(handle, colorPrimaryText);
+		cout << "‘айл Ќ≈ ¬ќ«ћќ∆Ќќ открыть, т.к. он не создан" << endl;
+		exit(1);
+	}
+	coordinate.X = startPosX; coordinate.Y = startPosY;
+	SetConsoleCursorPosition(handle, coordinate);
+	SetConsoleTextAttribute(handle, colorPrimaryText);
+	cout << "‘айл успешно открыт дл€ записи в конец файла!!!" << endl;
+
+	char newFirstName[20], newSecondName[20], newTown[20];
+	printf("\t¬ведите фамилию студента: ");
+	SetConsoleTextAttribute(handle, colorAccentText);
+	cin.getline(newSecondName, 20);
+
+	SetConsoleTextAttribute(handle, colorPrimaryText);
+	printf("\t¬ведите им€ студента: ");
+	SetConsoleTextAttribute(handle, colorAccentText);
+	cin.getline(newFirstName, 20);
+
+	SetConsoleTextAttribute(handle, colorPrimaryText);
+	printf("\t¬ведите родной город студента: ");
+	SetConsoleTextAttribute(handle, colorAccentText);
+	cin.getline(newTown, 20);
+
+	unsigned int newSchool = 0;
+	if (strcmp(newTown, "ќмск") == 0) {
+		SetConsoleTextAttribute(handle, colorPrimaryText);
+		printf("\t¬ведите номер школы: ");
+		SetConsoleTextAttribute(handle, colorAccentText);
+		scanf_s("%u", &newSchool);
+	}
+
+	fprintf(DB, "\n%s\n%s\n%s\n%u", newFirstName, newSecondName, newTown, newSchool);
+
+	fclose(DB);
+	_getch();
+}
+
+void deleteRecord() {
+
 }

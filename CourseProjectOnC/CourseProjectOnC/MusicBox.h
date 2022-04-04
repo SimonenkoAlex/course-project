@@ -391,6 +391,7 @@ void HappyBirthday()
 }
 
 int musicBox() {
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	char code;
 	int x = 5, y = 5; 
 	int randMusic;
@@ -399,7 +400,7 @@ int musicBox() {
 	do
 	{
 		system("cls");
-		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), p);
+		SetConsoleCursorPosition(handle, p);
 		cout << "Нажмите Enter для открытия шкатулки!";
 		code = _getch();
 		if (code == 13) {
