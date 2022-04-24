@@ -23,6 +23,32 @@ void SystemClear() {
 	Rectangle(hdc, 0, 0, 10000, 10000); 
 }
 
+int random(int range) { return rand() % range; }
+
+void splashScreen() { // заставка круги на воде
+	HWND hwn = GetConsoleWindow();
+	HDC hdc = GetDC(hwn);
+	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
+	HPEN pen; HBRUSH BRUSH;
+	int x, y, R, G, B, radius[] = {10, 30, 50, 70, 90, 110, 130, 150};
+	while (!_kbhit()) {
+		x = random(500); y = random(500); 
+		R = random(256); G = random(256); B = random(256);
+		pen = CreatePen(PS_SOLID, 5, RGB(R, G, B)); 
+		BRUSH = CreateSolidBrush(RGB(0, 0, 0)); 
+		SelectObject(hdc, pen); SelectObject(hdc, BRUSH);
+		for (int i = 0; i < 9; i++) {
+			Ellipse(hdc, x - radius[i], y - radius[i], x + radius[i], y + radius[i]);
+			Sleep(200);
+			Ellipse(hdc, x - radius[i - 1], y - radius[i - 1], x + radius[i - 1], y + radius[i - 1]);
+			Sleep(150);
+			//SystemClear();
+		}
+	}
+	//DeleteObject(pen); DeleteObject(BRUSH);
+	ReleaseDC(hwn, hdc);
+}
+
 void aboutAuthor() {
 	system("cls"); 
 	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE); 
@@ -42,6 +68,8 @@ void aboutAuthor() {
 		cout << textRecord[i] << endl;
 		cout << "\t------------------------------------------------------------";
 	}
+	_getch();
+	splashScreen();
 	_getch();
 }
 
@@ -344,9 +372,19 @@ void select(int position) {
 	}
 }
 
+void resizeConsoleWindow(HANDLE handle, int width, int height) {
+	COORD newWindow = { width, height };
+	SMALL_RECT srcWindow = { 0, 0, newWindow.X - 1, newWindow.Y - 1 };
+	SMALL_RECT minWindow = { 0, 0, 0, 0 };
+	SetConsoleWindowInfo(handle, true, &minWindow);
+	SetConsoleScreenBufferSize(handle, newWindow);
+	SetConsoleWindowInfo(handle, true, &srcWindow);
+}
+
 int main() {
 	setlocale(LC_CTYPE, "rus");
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	resizeConsoleWindow(handle, 100, 50);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	char lines[][20] = { "Автор", "Таблица", "Графики", "Уравнение", 

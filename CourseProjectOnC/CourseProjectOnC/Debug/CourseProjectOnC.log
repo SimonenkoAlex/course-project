@@ -14,8 +14,9 @@ c:\program_project\github\course-project\courseprojectonc\courseprojectonc\seaba
 c:\program_project\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(189): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
 c:\program_project\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(615): warning C4101: coordinate: неиспользованная локальная переменная
 c:\program_project\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(399): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(139): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(142): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(148): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(151): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(167): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(170): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(176): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(179): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(376): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
   CourseProjectOnC.vcxproj -> C:\Program_Project\GitHub\course-project\CourseProjectOnC\Debug\CourseProjectOnC.exe
