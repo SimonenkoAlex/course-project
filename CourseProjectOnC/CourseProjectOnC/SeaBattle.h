@@ -339,7 +339,10 @@ int shot(int map[sizeMap][sizeMap], int mask[sizeMap][sizeMap], int x, int y, in
 	return result;
 }
 
+void SystemFonGame();
+
 int Game() {
+	SystemFonGame();
 	setlocale(LC_CTYPE, "rus");
 	while (true)
 	{
@@ -388,6 +391,7 @@ int Game() {
 					resultShot = shot(mapAI, maskAI, x, y, shipsAI);
 					if (resultShot == 1) {
 						cout << "Ранен" << endl;
+						PlaySound("popadanie-v-tsel.wav", 0, SND_ASYNC | SND_NOWAIT);
 					}
 					else if (resultShot == 2) {
 						bool killed = 1;
@@ -405,9 +409,11 @@ int Game() {
 							break;
 						}
 						cout << "Убит" << endl;
+						PlaySound("popadanie-v-tsel.wav", 0, SND_ASYNC | SND_NOWAIT);
 					}
 					else {
 						cout << "Промах" << endl;
+						PlaySound("raketa-proletela-mimo.wav", 0, SND_ASYNC | SND_NOWAIT);
 					}
 				}
 				else {
@@ -430,6 +436,7 @@ int Game() {
 								dirs.pop_back();
 							}
 							cout << "Ранен" << endl;
+							PlaySound("popadanie-v-tsel.wav", 0, SND_ASYNC | SND_NOWAIT);
 						}
 						else if (resultShot == 2) {
 							bool killed = 1;
@@ -447,9 +454,11 @@ int Game() {
 								break;
 							}
 							cout << "Убит" << endl;
+							PlaySound("popadanie-v-tsel.wav", 0, SND_ASYNC | SND_NOWAIT);
 						}
 						else {
 							cout << "Промах" << endl;
+							PlaySound("raketa-proletela-mimo.wav", 0, SND_ASYNC | SND_NOWAIT);
 						}
 					}
 					else
@@ -501,6 +510,7 @@ int Game() {
 						resultShot = shot(map, mask, xAI, yAI, shipsPlayer);
 						if (resultShot == 1) {
 							cout << "Ранен" << endl;
+							PlaySound("popadanie-v-tsel.wav", 0, SND_ASYNC | SND_NOWAIT);
 						}
 						else if (resultShot == 2) {
 							mode = 0;
@@ -524,6 +534,7 @@ int Game() {
 								break;
 							}
 							cout << "Убит" << endl;
+							PlaySound("popadanie-v-tsel.wav", 0, SND_ASYNC | SND_NOWAIT);
 						}
 						else {
 							if (!dirs.empty())
@@ -534,6 +545,7 @@ int Game() {
 							xAI = firstHitX;
 							yAI = firstHitY;
 							cout << "Промах" << endl;
+							PlaySound("raketa-proletela-mimo.wav", 0, SND_ASYNC | SND_NOWAIT);
 						}
 					}
 				}
@@ -560,8 +572,9 @@ void SystemFonGame()
 {
 	HWND hwn = GetConsoleWindow();
 	HDC hdc = GetDC(hwn);
-	HPEN pen = CreatePen(PS_DASHDOT, 2, RGB(10, 10, 100));
-	HBRUSH brush = CreateSolidBrush(RGB(10, 10, 100));
+	HPEN pen = CreatePen(PS_DASHDOT, 2, RGB(0, 0, 0));
+	HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+	system("cls");
 	SelectObject(hdc, pen);
 	SelectObject(hdc, brush);
 	Rectangle(hdc, 0, 0, 10000, 10000);
@@ -574,25 +587,25 @@ void Help() {
 	gotoxy(x, y - 2);
 	printf("%20c", symbol);
 	gotoxy(x, y);
-	printf(" Для начала игры вам необходимо нажать на кнопку 'Начать игру'.");
+	printf("| Для начала игры вам необходимо нажать на кнопку 'Начать игру'. |");
 	gotoxy(x, y + 2);
-	printf(" После того как начнётся игра, вы увидите два поля.");
+	printf("| После того как начнётся игра, вы увидите два поля.             |");
 	gotoxy(x, y + 4);
-	printf(" Верхнее поле - ваше, нижнее - соперника.");
+	printf("| Верхнее поле - ваше, нижнее - соперника.                       |");
 	gotoxy(x, y + 6);
-	printf(" Если сейчас ваш черёд хода, введите координаты клетки поля");
+	printf("| Если сейчас ваш черёд хода, введите координаты клетки поля     |");
 	gotoxy(x, y + 8);
-	printf(" соперника, по которым предполагается выстрел.");
+	printf("| соперника, по которым предполагается выстрел.                  |");
 	gotoxy(x, y + 10);
-	printf(" Если вы попали по кораблю или подбили его, то вы сново сможете");
+	printf("| Если вы попали по кораблю или подбили его, то вы сново сможете |");
 	gotoxy(x, y + 12);
-	printf(" ходить. Если вы промахнулись, то ход совершает ваш соперник.");
+	printf("| ходить. Если вы промахнулись, то ход совершает ваш соперник.   |");
 	gotoxy(x, y + 14);
-	printf(" Игра ведётся до тех пор, пока один из игроков не уничтожит");
+	printf("| Игра ведётся до тех пор, пока один из игроков не уничтожит     |");
 	gotoxy(x, y + 16);
-	printf(" весь флот соперника.");
+	printf("| весь флот соперника.                                           |");
 	gotoxy(x, y + 18);
-	printf(" Удачной игры!");
+	printf("| Удачной игры!                                                  |");
 	gotoxy(x, y + 20);
 	printf("%20c", symbol);
 	_getch();

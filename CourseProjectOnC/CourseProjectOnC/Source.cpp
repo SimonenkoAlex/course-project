@@ -3,10 +3,12 @@
 #include <iostream>
 #include <conio.h>
 #include <stdio.h>
+#include <mmsystem.h>
 #include "Handbook.h"
 #include "SoundSynth.h"
 #include "SeaBattle.h"
 #include "MusicBox.h"
+#include "SearchGivenArea.h"
 
 using namespace std;
 
@@ -23,7 +25,10 @@ void SystemClear() {
 	Rectangle(hdc, 0, 0, 10000, 10000); 
 }
 
-int random(int range) { return rand() % range; }
+int random(int range) { 
+	srand(time(NULL));
+	return rand() % range; 
+}
 
 void splashScreen() { // заставка круги на воде
 	HWND hwn = GetConsoleWindow();
@@ -37,13 +42,16 @@ void splashScreen() { // заставка круги на воде
 		pen = CreatePen(PS_SOLID, 5, RGB(R, G, B)); 
 		BRUSH = CreateSolidBrush(RGB(0, 0, 0)); 
 		SelectObject(hdc, pen); SelectObject(hdc, BRUSH);
+		PlaySound("voda-kaplya.wav", 0, SND_ASYNC | SND_NOWAIT);
 		for (int i = 0; i < 9; i++) {
 			Ellipse(hdc, x - radius[i], y - radius[i], x + radius[i], y + radius[i]);
 			Sleep(200);
+			PlaySound("malenkie-vspleski-vodyi.wav", 0, SND_ASYNC | SND_NOSTOP);
 			Ellipse(hdc, x - radius[i - 1], y - radius[i - 1], x + radius[i - 1], y + radius[i - 1]);
 			Sleep(150);
 			//SystemClear();
 		}
+		PlaySound(0, 0, SND_PURGE);
 	}
 	//DeleteObject(pen); DeleteObject(BRUSH);
 	ReleaseDC(hwn, hdc);
@@ -311,9 +319,21 @@ void equation() {
 	_getch();
 }
 
+void resizeConsoleWindow(HANDLE handle, int width, int height);
+
 void referenceBook() {
 	system("cls");
 	menuHandbook();
+	_getch();
+}
+
+void toSearchGivenArea() {
+	system("cls");
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	int randCoordX = random(200);
+	int randCoordY = random(75);
+	resizeConsoleWindow(handle, 200, 75);
+	readingMouseMovement(handle, randCoordX, randCoordY);
 	_getch();
 }
 
@@ -322,7 +342,8 @@ void selectGame(int position) {
 	case 0: musicBox(); system("cls"); break;
 	case 1: drawingSynthesizer(); SystemClear(); break;
 	case 2: toGameMenu(); SystemClear(); break;
-	case 3: exit(0);
+	case 3: toSearchGivenArea(); SystemClear(); break;
+	case 4: exit(0);
 	}
 }
 
@@ -331,9 +352,10 @@ void gameSelectMenu() {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	char lines[][25] = { "Музыкальная шкатулка", "Звуковой синтезатор", "Морской бой", "Выход" };
+	char lines[][25] = { "Музыкальная шкатулка", "Звуковой синтезатор", "Морской бой",
+		"Поиск заданной области", "Выход" };
 	COORD coordinate;
-	int position = 0, lastItemMenu = 4;
+	int position = 0, lastItemMenu = 5;
 	char code;
 	while (true) {
 		system("cls");

@@ -91,6 +91,7 @@ void browsingRecords() {
 	SetConsoleTextAttribute(handle, colorPrimaryText);
 	cout << "Файл успешно открыт!!!";
 
+	int countOther = 0, countOmsk = 0;
 	coordinate.X = startPosX - 5; coordinate.Y = startPosY + 2;
 	SetConsoleCursorPosition(handle, coordinate);
 	SetConsoleTextAttribute(handle, colorAccentText);
@@ -107,14 +108,17 @@ void browsingRecords() {
 		if (strcmp(z[i].town, "Омск") == 0) {
 			fscanf_s(DB, "%u", &z[i].school);
 			printf("|%17u|\n", z[i].school);
+			countOmsk++;
 		}
 		else {
 			fscanf_s(DB, "%u", &z[i].school);
 			printf("|%17c|\n", space);
+			countOther++;
 		}
 		i++;
 	}
 	printf("\t------------------------------------------------------------------\n");
+	printf("\tКол-во инногородних студентов: %d\n", countOther);
 	fclose(DB);
 	_getch();
 }
