@@ -25,36 +25,33 @@ void SystemClear() {
 	Rectangle(hdc, 0, 0, 10000, 10000); 
 }
 
-int random(int range) { 
-	srand(time(NULL));
-	return rand() % range; 
-}
-
 void splashScreen() { // заставка круги на воде
+	system("cls");
 	HWND hwn = GetConsoleWindow();
 	HDC hdc = GetDC(hwn);
 	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	HPEN pen; HBRUSH BRUSH;
+	HPEN PEN; HBRUSH BRUSH;
 	int x, y, R, G, B, radius[] = {10, 30, 50, 70, 90, 110, 130, 150};
 	while (!_kbhit()) {
-		x = random(500); y = random(500); 
+		x = random(800); y = random(800); 
 		R = random(256); G = random(256); B = random(256);
-		pen = CreatePen(PS_SOLID, 5, RGB(R, G, B)); 
+		PEN = CreatePen(PS_SOLID, 5, RGB(R, G, B));
 		BRUSH = CreateSolidBrush(RGB(0, 0, 0)); 
-		SelectObject(hdc, pen); SelectObject(hdc, BRUSH);
+		SelectObject(hdc, PEN); SelectObject(hdc, BRUSH);
 		PlaySound("voda-kaplya.wav", 0, SND_ASYNC | SND_NOWAIT);
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 7; i++) {
 			Ellipse(hdc, x - radius[i], y - radius[i], x + radius[i], y + radius[i]);
 			Sleep(200);
 			PlaySound("malenkie-vspleski-vodyi.wav", 0, SND_ASYNC | SND_NOSTOP);
-			Ellipse(hdc, x - radius[i - 1], y - radius[i - 1], x + radius[i - 1], y + radius[i - 1]);
+			Ellipse(hdc, x - radius[i + 1], y - radius[i + 1], x + radius[i + 1], y + radius[i + 1]);
 			Sleep(150);
-			//SystemClear();
+			SystemClear();
 		}
 		PlaySound(0, 0, SND_PURGE);
 	}
-	//DeleteObject(pen); DeleteObject(BRUSH);
+	//DeleteObject(PEN); DeleteObject(BRUSH);
 	ReleaseDC(hwn, hdc);
+	_getch();
 }
 
 void aboutAuthor() {
@@ -77,8 +74,6 @@ void aboutAuthor() {
 		cout << "\t------------------------------------------------------------";
 	}
 	_getch();
-	splashScreen();
-	_getch();
 }
 
 void functions() {
@@ -97,7 +92,7 @@ void functions() {
 	SetConsoleTextAttribute(hstdout, colorPrimaryText);
 	printf("Введите число интервалов табулирования: "); 
 	SetConsoleTextAttribute(hstdout, colorAccentText);
-	scanf_s("%d", &n);
+	scanf_s("%d", &n); // n = 20
 	long double dx = fabs(b - a) / (n - 1);
 	x[0] = a; // начало отсчёта - левая граница интервала
 	printf("\t-------------------------------------------------\n"); 
@@ -137,54 +132,69 @@ void graphics() {
 	system("cls");
 	HWND hwn = GetConsoleWindow(); 
 	HDC hdc = GetDC(hwn);
-	HPEN pen = CreatePen(PS_DASH, 2, RGB(140, 90, 10));
+	HPEN pen = CreatePen(PS_DASH, 3, RGB(140, 90, 10));
 	HPEN penF1 = CreatePen(PS_DASHDOT, 2, RGB(113, 47, 38));
 	HPEN penF2 = CreatePen(PS_DASHDOT, 2, RGB(213, 48, 50));
 	RECT rect;
 	GetClientRect(hwn, &rect);
 	// параметры и коэффициент интерполяции
-	const int c = 50, d = 270, k = 100;
-	double x, F1, F2, h = 0.001;
-	bool first = true, second = true;
+	const int c = rect.right / 2, d = rect.bottom / 2, k = 50;
+	double x, F1, F2, h = 0.001, a = 2, b = 4;
+	int x0 = c, y0 = d;
 	WORD nSize;
 	TCHAR str[100];
-	int x0 = c, y0 = d;
-	SelectObject(hdc, pen);
-	MoveToEx(hdc, c - 10, d, NULL);
-	LineTo(hdc, c*k, d);		// ось X
-	MoveToEx(hdc, c, 0, NULL);
-	LineTo(hdc, c, 2 * d);		// ось Y
-	GetClientRect(hwn, &rect);
-	for (int i = 0; i < 30; i++) {
-		MoveToEx(hdc, x0 - 10, y0 - k * i, NULL); //засечки на оси У 
-		LineTo(hdc, x0 + 10, y0 - k * i);
-		MoveToEx(hdc, x0 - 10, y0 + k * i, NULL);
-		LineTo(hdc, x0 + 10, y0 + k * i);
-		MoveToEx(hdc, x0 + k * i, y0 - 10, NULL); //засечки на оси Х 
-		LineTo(hdc, x0 + k * i, y0 + 10);
-		MoveToEx(hdc, x0 - k * i, y0 - 10, NULL);
-		LineTo(hdc, x0 - k * i, y0 + 10);
-		nSize = wsprintf(str, TEXT("%d"), i);
-		TextOut(hdc, x0 - 10, y0 - k * i, str, nSize);
-		TextOut(hdc, x0 + k * i, y0 + 10, str, nSize);
-	}
-	for (x = 0; x < 10; x += h) {
-		F1 = x * cos(x / 2);
-		if (first) {
-			SelectObject(hdc, penF1);
-			MoveToEx(hdc, c + k * x, d - k * F1, NULL);
-			first = false;
+	while (!_kbhit()) {
+		bool first = true, second = true;
+		SelectObject(hdc, pen);
+		MoveToEx(hdc, 0, d, NULL);
+		LineTo(hdc, c * k, d);		// ось X
+		MoveToEx(hdc, c, 0, NULL);
+		LineTo(hdc, c, k * d);		// ось Y
+		//GetClientRect(hwn, &rect);
+		for (int i = 0; i < 8; i++) {
+			MoveToEx(hdc, x0 - 10, y0 - k * i, NULL); //засечки на оси У 
+			LineTo(hdc, x0 + 10, y0 - k * i);
+			MoveToEx(hdc, x0 - 10, y0 + k * i, NULL);
+			LineTo(hdc, x0 + 10, y0 + k * i);
+			MoveToEx(hdc, x0 + k * i, y0 - 10, NULL); //засечки на оси Х 
+			LineTo(hdc, x0 + k * i, y0 + 10);
+			MoveToEx(hdc, x0 - k * i, y0 - 10, NULL);
+			LineTo(hdc, x0 - k * i, y0 + 10);
+			if (i == 0) {
+				nSize = wsprintf(str, TEXT("%d"), i);
+				TextOut(hdc, x0 - 10, y0 - k * i, str, nSize);
+			}
+			else {
+				nSize = wsprintf(str, TEXT("%d"), i);
+				TextOut(hdc, x0 - 15, y0 - k * i, str, nSize);
+				TextOut(hdc, x0 + k * i, y0 + 15, str, nSize);
+				nSize = wsprintf(str, TEXT("-%d"), i);
+				TextOut(hdc, x0 - 15, y0 + k * i, str, nSize);
+				TextOut(hdc, x0 - k * i, y0 + 15, str, nSize);
+			}
 		}
-		else LineTo(hdc, c + k * x, d - k * F1);
-	}
-	for (x = 0; x < 10; x += h) {
-		F2 = pow(x, 1.0 / 3.0) + sqrt(2.0) * exp(-x);
-		if (second) {
-			SelectObject(hdc, penF2);
-			MoveToEx(hdc, c + k * x, d - k * F2, NULL);
-			second = false;
+		for (x = a; x < b; x += h) {
+			F1 = x * cos(x / 2);
+			if (first) {
+				SelectObject(hdc, penF1);
+				MoveToEx(hdc, c + k * x, d - k * F1, NULL);
+				first = false;
+			}
+			else LineTo(hdc, c + k * x, d - k * F1);
 		}
-		else LineTo(hdc, c + k * x, d - k * F2);
+		nSize = wsprintf(str, TEXT("%s"), "y = x * cos(x / 2)");
+		TextOut(hdc, c + k * x, d - k * F1, str, nSize);
+		for (x = a; x < b; x += h) {
+			F2 = pow(x, 1.0 / 3.0) + sqrt(2.0) * exp(-x);
+			if (second) {
+				SelectObject(hdc, penF2);
+				MoveToEx(hdc, c + k * x, d - k * F2, NULL);
+				second = false;
+			}
+			else LineTo(hdc, c + k * x, d - k * F2);
+		}
+		nSize = wsprintf(str, TEXT("%s"), "y = x^(1/3) + 2^(1/2) * e^(-x)");
+		TextOut(hdc, c + k * x, d - k * F2, str, nSize);
 	}
 	_getch();
 }
@@ -198,9 +208,10 @@ void integral() {
 	COORD position;
 	int n, i; 
 	double a, b, h, Sum = 0, Integ = 1;
-	position.X = startPosX; position.Y = startPosY;
+	position.X = startPosX;
 	do {
 		system("cls");
+		position.Y = startPosY;
 		SetConsoleCursorPosition(hstdout, position);
 		SetConsoleTextAttribute(hstdout, colorSignatureText);
 		printf("Введите кол-во отрезков разбиения: ");
@@ -246,7 +257,7 @@ void integral() {
 	position.Y = startPosY + 14;
 	SetConsoleCursorPosition(hstdout, position);
 	SetConsoleTextAttribute(hstdout, colorPrimaryText);
-	printf("2) Метод прямоугольников");
+	printf("2) Метод трапеции");
 	h = fabs(b - a) / n; x[1] = a;
 	for (i = 1; i <= n - 1; ++i) {
 		F[i] = pow(x[i], 2) * log(x[i]);
@@ -321,76 +332,27 @@ void equation() {
 
 void resizeConsoleWindow(HANDLE handle, int width, int height);
 
-void referenceBook() {
-	system("cls");
-	menuHandbook();
-	_getch();
-}
-
-void toSearchGivenArea() {
-	system("cls");
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	int randCoordX = random(200);
-	int randCoordY = random(75);
-	resizeConsoleWindow(handle, 200, 75);
-	readingMouseMovement(handle, randCoordX, randCoordY);
-	_getch();
-}
-
-void selectGame(int position) {
-	switch (position) {
-	case 0: musicBox(); system("cls"); break;
-	case 1: drawingSynthesizer(); SystemClear(); break;
-	case 2: toGameMenu(); SystemClear(); break;
-	case 3: toSearchGivenArea(); SystemClear(); break;
-	case 4: exit(0);
-	}
-}
-
-void gameSelectMenu() {
-	system("cls");
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	char lines[][25] = { "Музыкальная шкатулка", "Звуковой синтезатор", "Морской бой",
-		"Поиск заданной области", "Выход" };
-	COORD coordinate;
-	int position = 0, lastItemMenu = 5;
-	char code;
-	while (true) {
-		system("cls");
-		for (int i = 0; i < lastItemMenu; i++) {
-			if (position == i)
-				SetConsoleTextAttribute(handle, active);
-			else
-				SetConsoleTextAttribute(handle, noActive);
-			coordinate.X = 25; coordinate.Y = 5 + i * 2;
-			SetConsoleCursorPosition(handle, coordinate);
-			cout << i + 1 << ") " << lines[i] << endl;
-		}
-		code = _getch();
-		if (code == 72) {
-			if (position == 0) position = lastItemMenu - 1;
-			else position--;
-		}
-		if (code == 80) {
-			if (position == lastItemMenu - 1) position = 0;
-			else position++;
-		}
-		if (code == 13) selectGame(position);
-	}
-}
-
-void select(int position) {
+void selectRGR(int position) {
 	switch (position) {
 	case 0: aboutAuthor(); system("cls"); break; 
-	case 1: functions(); system("cls"); break; 
-	case 2: graphics(); SystemClear(); break;
-	case 3: equation(); system("cls"); break; 
-	case 4: integral(); system("cls"); break; 
-	case 5: referenceBook(); system("cls"); break;
-	case 6: gameSelectMenu(); system("cls"); break;
-	case 7: exit(0);
+	case 1: splashScreen(); system("cls"); break;
+	case 2: functions(); system("cls"); break; 
+	case 3: graphics(); SystemClear(); break;
+	case 4: equation(); system("cls"); break; 
+	case 5: integral(); system("cls"); break; 
+	case 6: exit(0);
+	}
+}
+
+void selectCP(int position) {
+	switch (position) {
+	case 0: aboutAuthor(); system("cls"); break;
+	case 1: splashScreen(); system("cls"); break;
+	case 2: toGameMenu(); system("cls"); break;
+	case 3: menuHandbook(); system("cls"); break;
+	case 4: musicBox(); system("cls"); break;
+	case 5: drawingSynthesizer(); system("cls"); break;
+	case 6: exit(0);
 	}
 }
 
@@ -409,10 +371,10 @@ int main() {
 	resizeConsoleWindow(handle, 100, 50);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	char lines[][20] = { "Автор", "Таблица", "Графики", "Уравнение", 
-		"Интеграл", "Справочник", "Игры", "Выход" };
+	//char linesRGR[][20] = { "Автор", "Заставка", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
+	char linesCP[][25] = { "Автор", "Заставка", "Морской бой", "Справочник", "Музыкальная шкатулка", "Синтезатор", "Выход" };
 	COORD coordinate;
-	int position = 0, lastItemMenu = 8;
+	int position = 0, lastItemMenu = 7;
 	char code;
 	while (true) {
 		system("cls");
@@ -423,7 +385,8 @@ int main() {
 				SetConsoleTextAttribute(handle, noActive);
 			coordinate.X = 25; coordinate.Y = 5 + i * 2;
 			SetConsoleCursorPosition(handle, coordinate);
-			cout << i + 1 << ") " << lines[i] << endl;
+			//cout << i + 1 << ") " << linesRGR[i] << endl;
+			cout << i + 1 << ") " << linesCP[i] << endl;
 		}
 		code = _getch();
 		if (code == 72) {
@@ -434,7 +397,9 @@ int main() {
 			if (position == lastItemMenu - 1) position = 0;
 			else position++;
 		}
-		if (code == 13) select(position);
+		if (code == 13) 
+			//selectRGR(position);
+			selectCP(position);
 	}
 	return 0;
 }

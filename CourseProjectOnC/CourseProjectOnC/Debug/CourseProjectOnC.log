@@ -1,23 +1,27 @@
 ﻿  Source.cpp
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\handbook.h(183): warning C4101: z: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(248): warning C4101: nSize: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(248): warning C4101: str: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(261): warning C4101: nSize: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(261): warning C4101: str: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(273): warning C4101: nSize: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(273): warning C4101: str: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(286): warning C4101: nSize: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(286): warning C4101: str: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(299): warning C4101: nSize: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(299): warning C4101: str: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(19): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(189): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(628): warning C4101: coordinate: неиспользованная локальная переменная
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(399): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(29): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(175): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(178): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(184): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(187): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\program_project\github\course-project\courseprojectonc\courseprojectonc\source.cpp(398): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
-  CourseProjectOnC.vcxproj -> C:\Program_Project\GitHub\course-project\CourseProjectOnC\Debug\CourseProjectOnC.exe
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\handbook.h(183): warning C4101: z: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(248): warning C4101: nSize: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(248): warning C4101: str: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(261): warning C4101: nSize: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(261): warning C4101: str: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(273): warning C4101: nSize: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(273): warning C4101: str: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(286): warning C4101: nSize: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(286): warning C4101: str: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(299): warning C4101: nSize: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\soundsynth.h(299): warning C4101: str: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(19): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(189): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(628): warning C4101: coordinate: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(137): warning C4101: B: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(137): warning C4101: R: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(137): warning C4101: G: неиспользованная локальная переменная
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(397): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(180): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(183): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(186): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(191): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(194): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(197): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(360): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
+  CourseProjectOnC.vcxproj -> C:\Users\User\source\repos\GitHub\course-project\CourseProjectOnC\Debug\CourseProjectOnC.exe

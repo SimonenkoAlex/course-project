@@ -4,6 +4,11 @@
 
 using namespace std;
 
+int random(int range) {
+	//srand(time(NULL));
+	return rand() % range;
+}
+
 // В траве сидел кузнечик
 void Grasshoper()
 {
@@ -127,22 +132,15 @@ void MissionImpossible()
 
 void StarWars()
 {
-	Beep(300, 500);
-	Sleep(50);
-	Beep(300, 500);
-	Sleep(50);
-	Beep(300, 500);
-	Sleep(50);
-	Beep(250, 500);
-	Sleep(50);
-	Beep(350, 250);
-	Beep(300, 500);
-	Sleep(50);
-	Beep(250, 500);
-	Sleep(50);
-	Beep(350, 250);
-	Beep(300, 500);
-	Sleep(50);
+	int frequency[] = {300, 300, 300, 250, 350, 300, 250, 350, 300 };
+	int duration[] = { 500, 500, 500, 500, 250, 500, 500, 250, 500 };
+	int track_duration = 9, R, G, B;
+	for (int i = 0; i < track_duration; i++)
+	{
+		Beep(frequency[i], duration[i]);
+		if (i == 4 || i == 7) continue;
+		else Sleep(50);
+	}
 }
 
 void SuperMario()
