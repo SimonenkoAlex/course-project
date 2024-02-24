@@ -9,6 +9,17 @@ int random(int range) {
 	return rand() % range;
 }
 
+void SystemClear() {
+	system("cls");
+	HWND hwn = GetConsoleWindow();
+	HDC hdc = GetDC(hwn);
+	HPEN pen = CreatePen(PS_DASHDOT, 2, RGB(0, 0, 0));
+	HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+	SelectObject(hdc, pen);
+	SelectObject(hdc, brush);
+	Rectangle(hdc, 0, 0, 10000, 10000);
+}
+
 // В траве сидел кузнечик
 void Grasshoper()
 {
@@ -132,124 +143,82 @@ void MissionImpossible()
 
 void StarWars()
 {
-	int frequency[] = {300, 300, 300, 250, 350, 300, 250, 350, 300 };
-	int duration[] = { 500, 500, 500, 500, 250, 500, 500, 250, 500 };
-	int track_duration = 9, R, G, B;
+	system("cls");
+	HWND hwn = GetConsoleWindow();
+	HDC hdc = GetDC(hwn);
+	HPEN PEN; HBRUSH BRUSH;
+	RECT rect;
+	GetClientRect(hwn, &rect);
+	int frequency[] = { 392, 392, 392, 311, 466, 392, 311, 466, 392,
+						587, 587, 587, 622, 466, 369, 311, 466, 392,
+						784, 392, 392, 784, 739, 698, 659, 622, 659,
+						415, 554, 523, 493, 466, 440, 466,
+						311, 369, 311, 466, 392 };
+	int duration[] = { 350, 350, 350, 250, 100, 350, 250, 100, 700,
+					   350, 350, 350, 250, 100, 350, 250, 100, 700,
+					   350, 250, 100, 350, 250, 100, 100, 100, 450,
+					   150, 350, 250, 100, 100, 100, 450,
+					   150, 350, 250, 100, 750 };
+	int track_duration = 39, R, G, B, x = 0, y = rect.bottom;
 	for (int i = 0; i < track_duration; i++)
 	{
+		R = random(256); G = random(256); B = random(256);
+		PEN = CreatePen(PS_SOLID, 5, RGB(R, G, B));
+		BRUSH = CreateSolidBrush(RGB(R, G, B));
+		SelectObject(hdc, PEN); SelectObject(hdc, BRUSH);
+		Rectangle(hdc, x, y - frequency[i], x + 20, y);
 		Beep(frequency[i], duration[i]);
-		if (i == 4 || i == 7) continue;
-		else Sleep(50);
+		x += 20;
+		Sleep(duration[i]);
 	}
 }
 
 void SuperMario()
 {
-	Beep(659, 125);
-	Beep(659, 125);
-	Sleep(125);
-	Beep(659, 125);
-	Sleep(167);
-	Beep(523, 125);
-	Beep(659, 125);
-	Sleep(125);
-	Beep(784, 125);
-	Sleep(375);
-	Beep(392, 125);
-	Sleep(375);
-	Beep(523, 125);
-	Sleep(250);
-	Beep(392, 125);
-	Sleep(250);
-	Beep(330, 125);
-	Sleep(250);
-	Beep(440, 125);
-	Sleep(125);
-	Beep(494, 125);
-	Sleep(125);
-	Beep(466, 125);
-	Sleep(42);
-	Beep(440, 125);
-	Sleep(125);
-	Beep(392, 125);
-	Sleep(125);
-	Beep(659, 125);
-	Sleep(125);
-	Beep(784, 125);
-	Sleep(125);
-	Beep(880, 125);
-	Sleep(125);
-	Beep(698, 125);
-	Beep(784, 125);
-	Sleep(125);
-	Beep(659, 125);
-	Sleep(125);
-	Beep(523, 125);
-	Sleep(125);
-	Beep(587, 125);
-	Beep(494, 125);
-	Sleep(125);
-	Beep(523, 125);
-	Sleep(250);
-	Beep(392, 125);
-	Sleep(250);
-	Beep(330, 125);
-	Sleep(250);
-	Beep(440, 125);
-	Sleep(125);
-	Beep(494, 125);
-	Sleep(125);
-	Beep(466, 125);
-	Sleep(42);
-	Beep(440, 125);
-	Sleep(125);
-	Beep(392, 125);
-	Sleep(125);
-	Beep(659, 125);
-	Sleep(125);
-	Beep(784, 125);
-	Sleep(125);
-	Beep(880, 125);
-	Sleep(125);
-	Beep(698, 125);
-	Beep(784, 125);
-	Sleep(125);
-	Beep(659, 125);
-	Sleep(125);
-	Beep(523, 125);
-	Sleep(125);
-	Beep(587, 125);
-	Beep(494, 125);
-	Sleep(375);
-	Beep(784, 125);
-	Beep(740, 125);
-	Beep(698, 125);
-	Sleep(42);
-	Beep(622, 125);
-	Sleep(125);
-	Beep(659, 125);
-	Sleep(167);
-	Beep(415, 125);
-	Beep(440, 125);
-	Beep(523, 125);
-	Sleep(125);
-	Beep(440, 125);
-	Beep(523, 125);
-	Beep(587, 125);
-	Sleep(250);
-	Beep(784, 125);
-	Beep(740, 125);
-	Beep(698, 125);
-	Sleep(42);
-	Beep(622, 125);
-	Sleep(125);
-	Beep(659, 125);
-	Sleep(167);
-	Beep(698, 125);
-	Sleep(125);
-	Beep(698, 125);
-	Beep(698, 125);
-	Sleep(625);
+	system("cls");
+	HWND hwn = GetConsoleWindow();
+	HDC hdc = GetDC(hwn);
+	HPEN PEN; HBRUSH BRUSH;
+	RECT rect;
+	GetClientRect(hwn, &rect);
+	int frequency[] = { 1318, 1318, 1318, 1046, 1318, 1568, 784,
+						1046, 784, 659, 880, 987, 932, 880, 784,
+						1318, 1568, 1750, 1396, 1568, 1318, 1046, 
+						1174, 987, 1046, 784, 659, 880, 987, 932, 
+						880, 784, 1318, 1568, 1750, 1396, 1568, 1318, 
+						1046, 1174, 987, 1568, 1480, 1396, 1244, 1318, 
+						830, 880, 1046, 880, 1046, 1174, 0, 1568, 1480, 
+						1396, 1244, 1318, 2093, 2093, 2093, 1568, 1480, 
+						1396, 1244, 1318, 830, 880, 1046, 880, 1046, 
+						1174, 1244, 1174, 1046 };
+	int duration[] = { 150, 300, 150, 150, 300, 600, 600,
+					450, 150, 300, 300, 150, 150, 300, 210,
+					210, 150, 300, 150, 150, 300, 150, 150, 
+					450, 450, 150, 300, 300, 150, 150, 300,
+					210, 210, 150, 300, 150, 150, 300, 150, 
+					150, 450, 150, 150, 150, 300, 150, 150, 
+					150, 150, 150, 150, 150, 0,	  150, 150, 
+					150, 300, 150, 300, 150, 600, 150, 150, 
+					150, 300, 150, 150, 150, 150, 150, 150, 
+					150, 300, 450, 600 };
+	int track_duration = 75, R, G, B, x = 0, y = rect.bottom;
+	for (int i = 0; i < track_duration; i++)
+	{
+		R = random(256); G = random(256); B = random(256);
+		PEN = CreatePen(PS_SOLID, 5, RGB(R, G, B));
+		BRUSH = CreateSolidBrush(RGB(R, G, B));
+		SelectObject(hdc, PEN); SelectObject(hdc, BRUSH);
+		Rectangle(hdc, x, y - frequency[i] / 2, x + 20, y);
+		Beep(frequency[i], duration[i]);
+		x += 20;
+		Sleep(duration[i] / 2);
+		if (x >= rect.right)
+		{
+			SystemClear();
+			x = 0;
+			y = rect.bottom;
+		}
+	}
 }
 
 void Beethoven()
@@ -404,6 +373,7 @@ int musicBox() {
 		if (code == 13) {
 			srand((unsigned)time(0));
 			randMusic = rand() % countMusic;
+			//randMusic = 4;
 			switch (randMusic)
 			{
 			case 0: Grasshoper(); break;

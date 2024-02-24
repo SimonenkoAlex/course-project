@@ -15,16 +15,6 @@ using namespace std;
 const int startPosX = 10, startPosY = 5;
 FILE *DB;
 
-void SystemClear() { 
-	HWND hwn = GetConsoleWindow(); 
-	HDC hdc = GetDC(hwn); 
-	HPEN pen = CreatePen(PS_DASHDOT, 2, RGB(0, 0, 0)); 
-	HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0)); 
-	SelectObject(hdc, pen); 
-	SelectObject(hdc, brush); 
-	Rectangle(hdc, 0, 0, 10000, 10000); 
-}
-
 void splashScreen() { // заставка круги на воде
 	system("cls");
 	HWND hwn = GetConsoleWindow();

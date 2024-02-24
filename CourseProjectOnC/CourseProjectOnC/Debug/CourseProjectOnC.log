@@ -13,15 +13,12 @@ c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojecto
 c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(19): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
 c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(189): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
 c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\seabattle.h(628): warning C4101: coordinate: неиспользованная локальная переменная
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(137): warning C4101: B: неиспользованная локальная переменная
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(137): warning C4101: R: неиспользованная локальная переменная
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(137): warning C4101: G: неиспользованная локальная переменная
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(397): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(180): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(183): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(186): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(191): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(194): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(197): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(360): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\musicbox.h(366): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(170): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(173): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(176): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(181): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(184): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(187): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+c:\users\user\source\repos\github\course-project\courseprojectonc\courseprojectonc\source.cpp(350): warning C4838: преобразование из "int" в "SHORT" требует сужающего преобразования
   CourseProjectOnC.vcxproj -> C:\Users\User\source\repos\GitHub\course-project\CourseProjectOnC\Debug\CourseProjectOnC.exe
