@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <conio.h>
 #include <locale.h>
+#include <string>
 #include <iostream>
 
 #pragma warning(disable:4996)
@@ -100,6 +101,7 @@ void browsingRecords() {
 	printf("\t|         |             |                      |                 |\n");
 	while (!feof(DB)) {
 		fscanf(DB, "%s", z[i].firstName);
+		//fgets(z[i].firstName, 20, DB);
 		printf("\t|%9s", z[i].firstName);
 		fscanf(DB, "%s", z[i].secondName);
 		printf("|%13s", z[i].secondName);

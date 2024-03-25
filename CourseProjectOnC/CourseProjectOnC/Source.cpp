@@ -130,7 +130,8 @@ void graphics() {
 	RECT rect;
 	GetClientRect(hwn, &rect);
 	// параметры и коэффициент интерполяции
-	const int c = rect.right / 2, d = rect.bottom / 2, k = 50;
+	const int width = rect.right, height = rect.bottom;
+	const int c = width / 2, d = height / 2, k = 50;
 	double x, F1, F2, h = 0.001, a = 2, b = 4;
 	int x0 = c, y0 = d;
 	WORD nSize;
@@ -138,15 +139,17 @@ void graphics() {
 	while (!_kbhit()) {
 		bool first = true, second = true;
 		SetBkColor(hdc, RGB(0, 0, 0));
+		SetTextColor(hdc, RGB(255, 255, 0));
 		SelectObject(hdc, pen);
+		nSize = wsprintf(str, TEXT("%s"), "X");
+		TextOut(hdc, width - 10, d, str, nSize);
 		MoveToEx(hdc, 0, d, NULL);
 		LineTo(hdc, c * k, d);		// ось X
+		nSize = wsprintf(str, TEXT("%s"), "Y");
+		TextOut(hdc, c + 10, 0, str, nSize);
 		MoveToEx(hdc, c, 0, NULL);
 		LineTo(hdc, c, k * d);		// ось Y
 		//GetClientRect(hwn, &rect);
-		SetTextColor(hdc, RGB(255, 255, 0));
-		//nSize = wsprintf(str, TEXT("%s"), "X");
-		//TextOut(hdc, c + k * x, d - k * F1, str, nSize);
 		for (int i = 0; i < 8; i++) {
 			MoveToEx(hdc, x0 - 10, y0 - k * i, NULL); //засечки на оси У 
 			LineTo(hdc, x0 + 10, y0 - k * i);
@@ -369,8 +372,8 @@ int main() {
 	resizeConsoleWindow(handle, 100, 50);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	char linesRGR[][20] = { "Автор", "Заставка", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
-	//char linesCP[][25] = { "Автор", "Заставка", "Морской бой", "Справочник", "Музыкальная шкатулка", "Синтезатор", "Выход" };
+	//char linesRGR[][20] = { "Автор", "Заставка", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
+	char linesCP[][25] = { "Автор", "Заставка", "Морской бой", "Справочник", "Музыкальная шкатулка", "Синтезатор", "Выход" };
 	COORD coordinate;
 	int position = 0, lastItemMenu = 7;
 	char code;
@@ -383,8 +386,8 @@ int main() {
 				SetConsoleTextAttribute(handle, noActive);
 			coordinate.X = 25; coordinate.Y = 5 + i * 2;
 			SetConsoleCursorPosition(handle, coordinate);
-			cout << i + 1 << ") " << linesRGR[i] << endl;
-			//cout << i + 1 << ") " << linesCP[i] << endl;
+			//cout << i + 1 << ") " << linesRGR[i] << endl;
+			cout << i + 1 << ") " << linesCP[i] << endl;
 		}
 		code = _getch();
 		if (code == 72) {
@@ -396,8 +399,8 @@ int main() {
 			else position++;
 		}
 		if (code == 13) 
-			selectRGR(position);
-			//selectCP(position);
+			//selectRGR(position);
+			selectCP(position);
 	}
 	return 0;
 }
