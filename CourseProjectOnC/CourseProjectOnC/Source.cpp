@@ -75,8 +75,7 @@ void functions() {
 	WORD colorAccentText = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
 	COORD position;	
 	int n, i; 
-	double a = 2, b = 4, x[21], F1[21], F2[21], 
-		maxF1 = 0, maxF2 = 0, minF1 = 0, minF2 = 0;
+	double a = 2, b = 4, x[21], F1[21], F2[21];
 	position.X = startPosX; position.Y = startPosY;
 	SetConsoleCursorPosition(hstdout, position);
 	SetConsoleTextAttribute(hstdout, colorPrimaryText);
@@ -91,11 +90,14 @@ void functions() {
 	for (i = 0; i < n; ++i) { 
 		F1[i] = x[i] * cos(x[i] / 2); 
 		F2[i] = pow(x[i], 1.0 / 3.0) + sqrt(2.0) * exp(-x[i]); 
-		if (maxF1 < F1[i]) maxF1 = F1[i]; 
-		if (maxF2 < F2[i]) maxF2 = F2[i]; 
-		if (minF1 > F1[i]) minF1 = F1[i]; 
-		if (minF2 > F2[i]) minF2 = F2[i]; 
 		x[i + 1] = x[i] + dx; 
+	}
+	double maxF1 = F1[0], maxF2 = F2[0], minF1 = F1[0], minF2 = F2[0];
+	for (i = 0; i < n; ++i) {
+		if (maxF1 < F1[i]) maxF1 = F1[i];
+		if (maxF2 < F2[i]) maxF2 = F2[i];
+		if (minF1 > F1[i]) minF1 = F1[i];
+		if (minF2 > F2[i]) minF2 = F2[i];
 	}
 	for (i = 0; i < n; ++i) { 
 		printf("\t|%3d|%11.3f|", i + 1, x[i]); 
@@ -135,12 +137,16 @@ void graphics() {
 	TCHAR str[100];
 	while (!_kbhit()) {
 		bool first = true, second = true;
+		SetBkColor(hdc, RGB(0, 0, 0));
 		SelectObject(hdc, pen);
 		MoveToEx(hdc, 0, d, NULL);
 		LineTo(hdc, c * k, d);		// ось X
 		MoveToEx(hdc, c, 0, NULL);
 		LineTo(hdc, c, k * d);		// ось Y
 		//GetClientRect(hwn, &rect);
+		SetTextColor(hdc, RGB(255, 255, 0));
+		//nSize = wsprintf(str, TEXT("%s"), "X");
+		//TextOut(hdc, c + k * x, d - k * F1, str, nSize);
 		for (int i = 0; i < 8; i++) {
 			MoveToEx(hdc, x0 - 10, y0 - k * i, NULL); //засечки на оси У 
 			LineTo(hdc, x0 + 10, y0 - k * i);
@@ -172,6 +178,7 @@ void graphics() {
 			}
 			else LineTo(hdc, c + k * x, d - k * F1);
 		}
+		SetTextColor(hdc, RGB(113, 47, 38));
 		nSize = wsprintf(str, TEXT("%s"), "y = x * cos(x / 2)");
 		TextOut(hdc, c + k * x, d - k * F1, str, nSize);
 		for (x = a; x < b; x += h) {
@@ -183,6 +190,7 @@ void graphics() {
 			}
 			else LineTo(hdc, c + k * x, d - k * F2);
 		}
+		SetTextColor(hdc, RGB(213, 48, 50));
 		nSize = wsprintf(str, TEXT("%s"), "y = x^(1/3) + 2^(1/2) * e^(-x)");
 		TextOut(hdc, c + k * x, d - k * F2, str, nSize);
 	}
@@ -361,8 +369,8 @@ int main() {
 	resizeConsoleWindow(handle, 100, 50);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	//char linesRGR[][20] = { "Автор", "Заставка", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
-	char linesCP[][25] = { "Автор", "Заставка", "Морской бой", "Справочник", "Музыкальная шкатулка", "Синтезатор", "Выход" };
+	char linesRGR[][20] = { "Автор", "Заставка", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
+	//char linesCP[][25] = { "Автор", "Заставка", "Морской бой", "Справочник", "Музыкальная шкатулка", "Синтезатор", "Выход" };
 	COORD coordinate;
 	int position = 0, lastItemMenu = 7;
 	char code;
@@ -375,8 +383,8 @@ int main() {
 				SetConsoleTextAttribute(handle, noActive);
 			coordinate.X = 25; coordinate.Y = 5 + i * 2;
 			SetConsoleCursorPosition(handle, coordinate);
-			//cout << i + 1 << ") " << linesRGR[i] << endl;
-			cout << i + 1 << ") " << linesCP[i] << endl;
+			cout << i + 1 << ") " << linesRGR[i] << endl;
+			//cout << i + 1 << ") " << linesCP[i] << endl;
 		}
 		code = _getch();
 		if (code == 72) {
@@ -388,8 +396,8 @@ int main() {
 			else position++;
 		}
 		if (code == 13) 
-			//selectRGR(position);
-			selectCP(position);
+			selectRGR(position);
+			//selectCP(position);
 	}
 	return 0;
 }
