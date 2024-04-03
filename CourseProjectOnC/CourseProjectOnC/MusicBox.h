@@ -1,5 +1,6 @@
 #include <conio.h>
 #include <ctime>
+#include <fstream>
 #include <windows.h>
 
 using namespace std;
@@ -147,30 +148,25 @@ void StarWars()
 	HWND hwn = GetConsoleWindow();
 	HDC hdc = GetDC(hwn);
 	HPEN PEN; HBRUSH BRUSH;
-	RECT rect;
-	GetClientRect(hwn, &rect);
-	int frequency[] = { 392, 392, 392, 311, 466, 392, 311, 466, 392,
-						587, 587, 587, 622, 466, 369, 311, 466, 392,
-						784, 392, 392, 784, 739, 698, 659, 622, 659,
-						415, 554, 523, 493, 466, 440, 466,
-						311, 369, 311, 466, 392 };
-	int duration[] = { 350, 350, 350, 250, 100, 350, 250, 100, 700,
-					   350, 350, 350, 250, 100, 350, 250, 100, 700,
-					   350, 250, 100, 350, 250, 100, 100, 100, 450,
-					   150, 350, 250, 100, 100, 100, 450,
-					   150, 350, 250, 100, 750 };
-	int track_duration = 39, R, G, B, x = 0, y = rect.bottom;
-	for (int i = 0; i < track_duration; i++)
+	RECT rect; GetClientRect(hwn, &rect);
+	int frequency, duration, R, G, B, x = 0, y = rect.bottom;
+	ifstream in;	// поток для чтения
+	in.open(".\\music\\star_wars.txt");
+	if (in.is_open())
 	{
-		R = random(256); G = random(256); B = random(256);
-		PEN = CreatePen(PS_SOLID, 5, RGB(R, G, B));
-		BRUSH = CreateSolidBrush(RGB(R, G, B));
-		SelectObject(hdc, PEN); SelectObject(hdc, BRUSH);
-		Rectangle(hdc, x, y - frequency[i], x + 20, y);
-		Beep(frequency[i], duration[i]);
-		x += 20;
-		Sleep(duration[i]);
+		while (in >> frequency >> duration)
+		{
+			R = random(256); G = random(256); B = random(256);
+			PEN = CreatePen(PS_SOLID, 5, RGB(R, G, B));
+			BRUSH = CreateSolidBrush(RGB(R, G, B));
+			SelectObject(hdc, PEN); SelectObject(hdc, BRUSH);
+			Rectangle(hdc, x, y - frequency, x + 20, y);
+			Beep(frequency, duration);
+			x += 20;
+			Sleep(duration);
+		}
 	}
+	else cout << "Не удалось открыть файл!" << endl;
 }
 
 void SuperMario()
@@ -372,8 +368,8 @@ int musicBox() {
 		code = _getch();
 		if (code == 13) {
 			srand((unsigned)time(0));
-			randMusic = rand() % countMusic;
-			//randMusic = 4;
+			//randMusic = rand() % countMusic;
+			randMusic = 3;
 			switch (randMusic)
 			{
 			case 0: Grasshoper(); break;
