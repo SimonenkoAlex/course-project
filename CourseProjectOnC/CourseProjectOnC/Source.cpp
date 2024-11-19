@@ -372,8 +372,8 @@ int main() {
 	resizeConsoleWindow(handle, 100, 50);
 	WORD active = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	WORD noActive = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
-	//char linesRGR[][20] = { "Автор", "Заставка", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
-	char linesCP[][25] = { "Автор", "Заставка", "Морской бой", "Справочник", "Музыкальная шкатулка", "Синтезатор", "Выход" };
+	char linesRGR[][20] = { "Автор", "Заставка", "Таблица", "Графики", "Уравнение", "Интеграл", "Выход" };
+	//char linesCP[][25] = { "Автор", "Заставка", "Морской бой", "Справочник", "Музыкальная шкатулка", "Синтезатор", "Выход" };
 	COORD coordinate;
 	int position = 0, lastItemMenu = 7;
 	char code;
@@ -386,8 +386,8 @@ int main() {
 				SetConsoleTextAttribute(handle, noActive);
 			coordinate.X = 25; coordinate.Y = 5 + i * 2;
 			SetConsoleCursorPosition(handle, coordinate);
-			//cout << i + 1 << ") " << linesRGR[i] << endl;
-			cout << i + 1 << ") " << linesCP[i] << endl;
+			cout << i + 1 << ") " << linesRGR[i] << endl;
+			//cout << i + 1 << ") " << linesCP[i] << endl;
 		}
 		code = _getch();
 		if (code == 72) {
@@ -399,8 +399,8 @@ int main() {
 			else position++;
 		}
 		if (code == 13) 
-			//selectRGR(position);
-			selectCP(position);
+			selectRGR(position);
+			//selectCP(position);
 	}
 	return 0;
 }

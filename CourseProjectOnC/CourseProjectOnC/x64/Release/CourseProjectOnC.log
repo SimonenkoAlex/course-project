@@ -30,4 +30,5 @@ C:\Users\IVT-344-7\source\repos\GitHub\course-project\CourseProjectOnC\CoursePro
 C:\Users\IVT-344-7\source\repos\GitHub\course-project\CourseProjectOnC\CourseProjectOnC\Source.cpp(198,18): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
 C:\Users\IVT-344-7\source\repos\GitHub\course-project\CourseProjectOnC\CourseProjectOnC\Source.cpp(361,22): warning C4838: Преобразование из "int" в "SHORT" требует сужающего преобразования.
 C:\Users\IVT-344-7\source\repos\GitHub\course-project\CourseProjectOnC\CourseProjectOnC\Source.cpp(361,29): warning C4838: Преобразование из "int" в "SHORT" требует сужающего преобразования.
-  CourseProjectOnC.vcxproj -> C:\Users\IVT-344-7\source\repos\GitHub\course-project\CourseProjectOnC\Debug\CourseProjectOnC.exe
+Source.obj : error LNK2001: неразрешенный внешний символ __imp_PlaySoundA.
+C:\Users\IVT-344-7\source\repos\GitHub\course-project\CourseProjectOnC\x64\Release\CourseProjectOnC.exe : fatal error LNK1120: неразрешенных внешних элементов: 1
